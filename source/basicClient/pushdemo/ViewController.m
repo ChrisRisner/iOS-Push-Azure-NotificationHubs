@@ -72,10 +72,7 @@
                   @"iOSUser"
               ];
     NSSet *tagSet = [[NSSet alloc] initWithArray:tagArray];
-    
     NSString *template = @"{\"aps\": {\"alert\": \"$(message)\"}}";
-    
-    
     [self.hub registerTemplateWithDeviceToken:self.pushTokenData name:@"messageTemplate" jsonBodyTemplate:template expiryTemplate:nil tags:tagSet completion:^(NSError *error) {
         if (error != nil) {
             NSLog(@"Error registering for push notifications: %@", error);
@@ -83,7 +80,6 @@
             NSLog(@"Success registering for push with template");
         }
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning

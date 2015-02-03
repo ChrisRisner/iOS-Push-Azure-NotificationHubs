@@ -12,10 +12,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
+            |UIRemoteNotificationTypeSound
+         |UIRemoteNotificationTypeAlert) categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+
     return YES;
 }
 							
+-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    NSLog(@"%@", notificationSettings);
+    [application registerForRemoteNotifications];
+}
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"APN device token: %@", deviceToken);
     NSString *deviceTokenString = [NSString stringWithFormat:@"%@",deviceToken];
@@ -38,5 +47,4 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
                           @"OK" otherButtonTitles:nil, nil];
     [alert show];
 }
-
 @end

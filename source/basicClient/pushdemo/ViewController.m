@@ -27,8 +27,9 @@
     delegate.vc = self;
     
     self.hub = [[SBNotificationHub alloc] initWithConnectionString:
-                @"NotificationHubListenSharedAccessSignature"
-           notificationHubPath:@"NotificationHubName"];
+                @"ListenSharedAccessSignature"
+           notificationHubPath:@"HubName"];
+    
 }
 
 -(void)setPushToken:(NSString *)token andData:(NSData *) data {
